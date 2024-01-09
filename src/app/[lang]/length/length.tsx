@@ -37,7 +37,9 @@ const Length = () => {
     }, response?.data?.data?.[0])
   }, [response?.data?.data, comment])
   return (
-    (response.isLoading) ? <p>{langTrans('loading/data')}</p> : <>
+    (response?.isLoading) ? <p>{langTrans('data/loading')}</p> :
+    (response?.isError && <p>{langTrans('data/error')}</p>) ||
+    <>
       <h3 className="title">{langTrans('title/graph/bar')}</h3>
       <BarGraph data={[ comment?.shortest, averageComment, comment?.longest ]}/>
       <h3 className="title">{langTrans('title/comment/shortest')}</h3>

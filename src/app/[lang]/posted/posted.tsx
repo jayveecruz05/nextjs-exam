@@ -11,7 +11,9 @@ const Posted = () => {
   // Queries
   const response: any = getComments()
   return (
-    (response.isLoading) ? <p>{langTrans('loading/data')}</p> : <>
+    (response?.isLoading) ? <p>{langTrans('data/loading')}</p> :
+    (response?.isError && <p>{langTrans('data/error')}</p>) ||
+    <>
       <h3 className="title">{langTrans('title/graph/line')}</h3>
       <LineGraph data={response?.data?.data}/>
     </>

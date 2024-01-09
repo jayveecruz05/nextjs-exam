@@ -40,7 +40,8 @@ const Comments = () => {
   const response: any = getComments()
   const onFilterTextBoxChanged = useCallback(() => { tableRef.current.api.setGridOption('quickFilterText', searchRef?.current?.value); }, [])
   return (
-    (response?.isLoading && <p>{langTrans('loading/data')}</p>) ||
+    (response?.isLoading && <p>{langTrans('data/loading')}</p>) ||
+    (response?.isError && <p>{langTrans('data/error')}</p>) ||
     <>
       <div className="search-header">
         <span className="label">{langTrans('label/search')}</span>
