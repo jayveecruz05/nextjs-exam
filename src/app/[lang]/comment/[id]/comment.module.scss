@@ -1,0 +1,19 @@
+.back-button {
+  margin-bottom: 20px;
+}
+
+.properties-holder {
+  border: 1px solid #384751;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 10px 20px;
+}
+
+.property {
+  margin: 10px 0;
+
+  .name {
+    text-transform: capitalize;
+    margin-right: 5px;
+  }
+}
