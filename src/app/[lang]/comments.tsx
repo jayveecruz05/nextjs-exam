@@ -38,7 +38,7 @@ const Comments = () => {
   const { getComments } = useApiContext().useComments()
   // Queries
   const response: any = getComments()
-  const onFilterTextBoxChanged = useCallback(() => { tableRef.current.api.setGridOption('quickFilterText', searchRef?.current?.value); }, [])
+  const onFilterTextBoxChanged = useCallback(() => { tableRef.current.api.setGridOption('quickFilterText', searchRef?.current?.value); }, [searchRef])
   return (
     (response?.isLoading && <p>{langTrans('data/loading')}</p>) ||
     (response?.isError && <p>{langTrans('data/error')}</p>) ||
