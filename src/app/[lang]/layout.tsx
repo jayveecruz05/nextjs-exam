@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ApiProvider } from '@/assets/script/api/context/global'
 import { ReactNode } from 'react';
+import Navigation from './navigation';
 
 interface LocaleLayoutProps {
   children: ReactNode
@@ -44,7 +45,10 @@ export default async function RootLayout({ children, params: { lang } }: LocaleL
           <QueryClientProvider client={mainQueryClient}>
             <ApiProvider>
               <NextIntlClientProvider locale={lang} messages={messages} timeZone={'Asia/Singapore'}>
-                {children}
+                <main className="main">
+                  <Navigation/>
+                  {children}
+                </main>
               </NextIntlClientProvider>
               <ReactQueryDevtools initialIsOpen={false} />
             </ApiProvider>

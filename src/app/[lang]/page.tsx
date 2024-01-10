@@ -1,7 +1,6 @@
 // import styles from './page.module.scss'
 import { getTranslations } from 'next-intl/server';
 // import type { Metadata } from 'next'
-import Navigation from './navigation';
 import Comments from './comments';
 
 export const metadata = async () => {
@@ -15,10 +14,9 @@ export const metadata = async () => {
 export default async function Home() {
   const langTrans = await getTranslations('lang');
   return (
-    <main className="main">
-      <Navigation/>
+    <>
       <h1 className="title">{langTrans('comments/title')}</h1>
       <Comments/>
-    </main>
+    </>
   )
 }

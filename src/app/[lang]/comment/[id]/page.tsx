@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 // import type { Metadata } from 'next'
 import Comment from './comment';
-import Navigation from '@/app/[lang]/navigation';
 
 export const metadata = async () => {
   const langTrans = await getTranslations('lang');
@@ -13,9 +12,6 @@ export const metadata = async () => {
 
 export default function Home() {
   return (
-    <main className="main">
-      <Navigation/>
-      <Comment/>
-    </main>
+    <Comment/>
   )
 }
