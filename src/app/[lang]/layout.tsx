@@ -55,8 +55,8 @@ const Layout = async ({ children, params: { lang } }: LocaleLayoutProps) => {
   )
 }
 
-const RootLayout = ({ children, params }: LocaleLayoutProps) => {
-  return (<Layout params={params}>{children}</Layout>)
+const RootLayout = (props: LocaleLayoutProps) => {
+  return (<Layout { ...props }>{props.children}</Layout>)
 }
 
 export default RootLayout
