@@ -1,7 +1,7 @@
 {
   "lang": {
     "comments/title": "Comments",
-    "comment/title": "Comment",
+    "comment/title": "Comment {id}",
     "domains/title": "Domains",
     "length/title": "Length",
     "posted/title": "Posted",
