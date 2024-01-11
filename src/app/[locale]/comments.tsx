@@ -32,7 +32,7 @@ const Comments = () => {
     { headerName: langTrans('data-name/action'), pinned: 'right', suppressMenu: true, maxWidth: 90, cellRenderer: (props: any) => LinkRenderer(langTrans, props) },
   ]), [langTrans])
 
-  const { getComments } = useApiContext().useComments()
+  const { getComments } = useApiContext()
   // Queries
   const response: any = getComments()
   const onFilterTextBoxChanged = useCallback(() => { tableRef.current.api.setGridOption('quickFilterText', searchRef?.current?.value); }, [searchRef])

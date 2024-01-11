@@ -21,7 +21,7 @@ const Values = (langTrans: any, object: any) => {
 
 const Length = () => {
   const langTrans = useTranslations('lang');
-  const { getComments } = useApiContext().useComments()
+  const { getComments } = useApiContext()
   // Queries
   const response: any = getComments()
   const comment = useMemo(() => response?.data?.data?.reduce((previousData: any, currentData: any) => ({

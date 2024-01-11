@@ -19,7 +19,7 @@ const Domains = () => {
     { headerName: langTrans('data-name/domain'), field: 'domain', flex: 1 }
   ]), [langTrans])
 
-  const { getComments } = useApiContext().useComments()
+  const { getComments } = useApiContext()
   // Queries
   const response: any = getComments()
   const domainList = useMemo(() => response?.data?.data?.reduce((previousData: any, currentData: any) => ((previousData.length === 0 || previousData.find((details: any) => (details.domain !== String(currentData.email).split('@')[1]))) ? [ ...previousData, { domain: String(currentData.email).split('@')[1] } ] : previousData), []), [response?.data?.data]);

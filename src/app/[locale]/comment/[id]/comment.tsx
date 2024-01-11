@@ -22,7 +22,7 @@ const Values = (langTrans: any, object: any) => {
 const Comment = () => {
   const langTrans = useTranslations('lang');
   const params = useParams<{ id: string }>()
-  const { getComment } = useApiContext().useComments()
+  const { getComment } = useApiContext()
   // Queries
   const response: any = getComment(params.id)
   return (

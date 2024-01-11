@@ -7,7 +7,7 @@ import LineGraph from './line-graph';
 
 const Posted = () => {
   const langTrans = useTranslations('lang');
-  const { getComments } = useApiContext().useComments()
+  const { getComments } = useApiContext()
   // Queries
   const response: any = getComments()
   return (
