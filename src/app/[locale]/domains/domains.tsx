@@ -6,7 +6,7 @@ import 'ag-grid-community/styles/ag-grid.css'; // Core CSS
 import 'ag-grid-community/styles/ag-theme-quartz.css'; // Theme
 
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react'
 
 import { useApiContext } from '@/assets/script/api/context/global'
@@ -15,6 +15,8 @@ let isFirstLoad: boolean = true;
 
 const Domains = () => {
   const langTrans = useTranslations('lang');
+  const searchRef: any = useRef()
+  const tableRef: any = useRef()
 
   // Column Definitions: Defines & controls grid columns.
   const colDefs: object[] = useMemo(() => ([
@@ -25,13 +27,20 @@ const Domains = () => {
   // Queries
   const response: any = getComments()
   const domainList = useMemo(() => response?.data?.data?.reduce((previousData: any, currentData: any) => ((previousData.length === 0 || previousData.find((details: any) => (details.domain !== String(currentData.email).split('@')[1]))) ? [ ...previousData, { domain: String(currentData.email).split('@')[1] } ] : previousData), []), [response?.data?.data]);
+  const onFilterTextBoxChanged = useCallback(() => { tableRef.current.api.setGridOption('quickFilterText', searchRef?.current?.value); }, [searchRef])
   useEffect(() => { isFirstLoad = !(isFirstLoad && (response?.isSuccess || response?.isError)); }, [response]);
   return (
     (response?.isLoading && isFirstLoad && <p>{langTrans('data/loading')}</p>) ||
     (response?.isError && <p>{langTrans('data/error')}</p>) ||
-    <div className={"ag-theme-quartz-dark"} style={{ width: '100%', height: '50vh' }}>
-      <AgGridReact columnDefs={colDefs} rowData={domainList} pagination={true} paginationPageSize={20} localeText={{ pageSizeSelectorLabel: langTrans('table-parts/page-size'), page: langTrans('table-parts/page'), of: langTrans('table-parts/of'), to: langTrans('table-parts/to') }}/>
-    </div>
+    <>
+      <div className="search-header">
+        <span className="label">{langTrans('label/search')}</span>
+        <input ref={searchRef} type="text" className="filter-text-box" placeholder={langTrans('label/placeholder')} onInput={onFilterTextBoxChanged}/>
+      </div>
+      <div className={"ag-theme-quartz-dark"} style={{ width: '100%', height: '50vh' }}>
+        <AgGridReact ref={tableRef} columnDefs={colDefs} rowData={domainList} pagination={true} paginationPageSize={20} localeText={{ pageSizeSelectorLabel: langTrans('table-parts/page-size'), page: langTrans('table-parts/page'), of: langTrans('table-parts/of'), to: langTrans('table-parts/to') }}/>
+      </div>
+    </>
   )
 }
 
