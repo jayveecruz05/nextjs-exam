@@ -55,9 +55,9 @@ const BarChart = ({ data }: any) => {
         .data(data)
         .join("rect")
         .attr("x", (d: any) => x(langTrans(`data-name/type/${String(d.type).toLowerCase()}`)))
-        .attr("y", (d: any) => y(String(d.body).length))
+        .attr("y", (d: any) => y(d.length))
         .attr("width", x.bandwidth())
-        .attr("height", (d: any) => height - y(String(d.body).length))
+        .attr("height", (d: any) => height - y(d.length))
         .attr("fill", "#FFF");
     } catch (error) {}
   }, [data, langTrans]);
