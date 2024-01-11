@@ -9,13 +9,12 @@ import { useTranslations } from 'next-intl';
 import { useRef, useCallback, useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react'
 import { Link } from '@/navigation'
-import type { AppPathnames } from '@/i18nConfig'
 
 import { useApiContext } from '@/assets/script/api/context/global'
 
 const LinkRenderer = (langTrans: any, props: any) => {
   return (
-    <Link href={`/comment/${props.data.id}` as AppPathnames}>{langTrans('data-name/view')}</Link>
+    <Link href={{ pathname: '/comment/[id]', params: { id: props.data.id } }}>{langTrans('data-name/view')}</Link>
   );
 };
 
