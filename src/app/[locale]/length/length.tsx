@@ -2,7 +2,7 @@
 
 import styles from './length.module.scss';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useApiContext } from '@/assets/script/api/context/global'
 import BarGraph from './bar-graph';
 
@@ -24,10 +24,13 @@ const Length = () => {
   const { getComments } = useApiContext()
   // Queries
   const response: any = getComments()
+
+  // Find the shortest and longest body
   const comment = useMemo(() => response?.data?.data?.reduce((previousData: any, currentData: any) => ({
     shortest: ((String(currentData.body).length < String(previousData?.shortest?.body).length) ? { ...currentData, length: (String(currentData.body).length), type: 'Shortest', } : previousData?.shortest),
     longest: ((String(currentData.body).length > String(previousData?.longest?.body).length) ? { ...currentData, length: (String(currentData.body).length), type: 'Longest', } : previousData?.longest),
   }), { shortest: response?.data?.data?.[0], longest: response?.data?.data?.[0] }), [response?.data?.data]);
+  
   // Find the object with the closest length to the average
   const averageComment = useMemo(() => {
     return response?.data?.data?.reduce((closest: any, item: any) => {
@@ -36,6 +39,7 @@ const Length = () => {
       return itemLengthDifference < closestLengthDifference ? { ...item, length: (String(item.body).length), type: 'Average', } : closest;
     }, response?.data?.data?.[0])
   }, [response?.data?.data, comment])
+  
   return (
     (response?.isLoading) ? <p>{langTrans('data/loading')}</p> :
     (response?.isError && <p>{langTrans('data/error')}</p>) ||

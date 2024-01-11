@@ -6,10 +6,12 @@ import 'ag-grid-community/styles/ag-grid.css'; // Core CSS
 import 'ag-grid-community/styles/ag-theme-quartz.css'; // Theme
 
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react'
 
 import { useApiContext } from '@/assets/script/api/context/global'
+
+let isFirstLoad: boolean = true;
 
 const Domains = () => {
   const langTrans = useTranslations('lang');
@@ -23,8 +25,9 @@ const Domains = () => {
   // Queries
   const response: any = getComments()
   const domainList = useMemo(() => response?.data?.data?.reduce((previousData: any, currentData: any) => ((previousData.length === 0 || previousData.find((details: any) => (details.domain !== String(currentData.email).split('@')[1]))) ? [ ...previousData, { domain: String(currentData.email).split('@')[1] } ] : previousData), []), [response?.data?.data]);
+  useEffect(() => { isFirstLoad = !(isFirstLoad && (response?.isSuccess || response?.isError)); }, [response]);
   return (
-    (response?.isLoading && <p>{langTrans('data/loading')}</p>) ||
+    (response?.isLoading && isFirstLoad && <p>{langTrans('data/loading')}</p>) ||
     (response?.isError && <p>{langTrans('data/error')}</p>) ||
     <div className={"ag-theme-quartz-dark"} style={{ width: '100%', height: '50vh' }}>
       <AgGridReact columnDefs={colDefs} rowData={domainList} pagination={true} paginationPageSize={20} localeText={{ pageSizeSelectorLabel: langTrans('table-parts/page-size'), page: langTrans('table-parts/page'), of: langTrans('table-parts/of'), to: langTrans('table-parts/to') }}/>

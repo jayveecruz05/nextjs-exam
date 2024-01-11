@@ -6,11 +6,13 @@ import 'ag-grid-community/styles/ag-grid.css'; // Core CSS
 import 'ag-grid-community/styles/ag-theme-quartz.css'; // Theme
 
 import { useTranslations } from 'next-intl';
-import { useRef, useCallback, useMemo } from 'react';
+import { useRef, useCallback, useMemo, useState, useEffect } from 'react';
 import { AgGridReact } from 'ag-grid-react'
 import { Link } from '@/navigation'
 
 import { useApiContext } from '@/assets/script/api/context/global'
+
+let isFirstLoad: boolean = true;
 
 const LinkRenderer = (langTrans: any, props: any) => {
   return (
@@ -36,8 +38,9 @@ const Comments = () => {
   // Queries
   const response: any = getComments()
   const onFilterTextBoxChanged = useCallback(() => { tableRef.current.api.setGridOption('quickFilterText', searchRef?.current?.value); }, [searchRef])
+  useEffect(() => { isFirstLoad = !(isFirstLoad && (response?.isSuccess || response?.isError)); }, [response]);
   return (
-    (response?.isLoading && <p>{langTrans('data/loading')}</p>) ||
+    (response?.isLoading && isFirstLoad && <p>{langTrans('data/loading')}</p>) ||
     (response?.isError && <p>{langTrans('data/error')}</p>) ||
     <>
       <div className="search-header">
