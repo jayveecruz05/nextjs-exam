@@ -8,16 +8,14 @@ import 'ag-grid-community/styles/ag-theme-quartz.css'; // Theme
 import { useTranslations } from 'next-intl';
 import { useRef, useCallback, useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react'
-import Link from 'next/link'
-import { usePathname } from "next/navigation"
+import { Link } from '@/navigation'
+import type { AppPathnames } from '@/i18nConfig'
 
 import { useApiContext } from '@/assets/script/api/context/global'
 
 const LinkRenderer = (langTrans: any, props: any) => {
-  const pathName: any = usePathname()
-  const defaultPath = pathName.slice(0, 3)
   return (
-    <Link href={`${defaultPath}/comment/${props.data.id}`}>{langTrans('data-name/view')}</Link>
+    <Link href={`/comment/${props.data.id}` as AppPathnames}>{langTrans('data-name/view')}</Link>
   );
 };
 
