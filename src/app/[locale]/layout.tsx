@@ -6,6 +6,10 @@ import { notFound } from 'next/navigation'
 import { Inter } from 'next/font/google'
 import './globals.scss'
 
+// AG Grid CSS
+import 'ag-grid-community/styles/ag-grid.css'; // Core CSS
+import 'ag-grid-community/styles/ag-theme-quartz.css'; // Theme
+
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ApiProvider } from '@/assets/script/api/context/global'
