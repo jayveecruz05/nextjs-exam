@@ -157,11 +157,19 @@ a {
   .filter-text-box {
     width: 50%;
     padding: 10px;
-    background-color: #FFF;
+    background-color: #dbc3b6;
+    color: #1F1A38;
     border: 1px solid #DDD;
     border-radius: 4px;
     box-sizing: border-box;
+    outline: none;
   }
+}
+
+.ag-theme-quartz {
+  --ag-background-color: #dbc3b6;
+  --ag-foreground-color: #1F1A38;
+  --ag-active-color: #7B506F;
 }
 
 // @media (prefers-color-scheme: dark) {
