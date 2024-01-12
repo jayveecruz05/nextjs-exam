@@ -18,6 +18,8 @@ bun dev
 
 ## Dockerize the app:
 
+Install Docker App in your computer [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+
 ```bash
 docker build -t vupico-exam-app .
 # then
