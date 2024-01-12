@@ -1,6 +1,6 @@
 FROM node:20
 
-WORKDIR /src/app
+WORKDIR /app
 
 COPY . .
 
