@@ -37,19 +37,16 @@ const Length = () => {
     }
   }, { shortest: String(response?.data?.data?.[0]?.body).length, longest: String(response?.data?.data?.[0]?.body).length, average: 0 })), [response?.data?.data])
 
-  // Find the shortest, longest body length
-  const comment = useMemo(() => response?.data?.data?.reduce((previousData: any, currentData: any) => ({
-    shortest: ((String(currentData.body).length <= commentLength?.shortest) ? { ...currentData, length: (String(currentData.body).length), type: 'Shortest', } : previousData?.shortest),
-    longest: ((String(currentData.body).length >= commentLength?.longest) ? { ...currentData, length: (String(currentData.body).length), type: 'Longest', } : previousData?.longest)
-  }), { shortest: response?.data?.data?.[0], longest: response?.data?.data?.[0] }), [response?.data?.data, commentLength]);
-  
-  // Find the object with the closest body length to the average body length
-  const averageComment = useMemo(() => (response?.data?.data?.reduce((previousData: any, currentData: any) => {
-      const itemLengthDifference = Math.abs(currentData.body.length - commentLength?.average);
-      const closestLengthDifference = Math.abs(previousData.body.length - commentLength?.average);
-      return itemLengthDifference < closestLengthDifference ? { ...currentData, length: (String(currentData.body).length), type: 'Average', } : previousData;
-    }, response?.data?.data?.[0])
-  ), [response?.data?.data, commentLength])
+  // Find the shortest, longest and average body length
+  const comment = useMemo(() => (response?.data?.data?.reduce((previousData: any, currentData: any) => {
+    const itemLengthDifference = Math.abs(String(currentData?.body).length - commentLength?.average);
+    const closestLengthDifference = Math.abs(String(previousData?.average?.body).length - commentLength?.average);
+    return {
+      shortest: ((String(currentData.body).length <= commentLength?.shortest) ? { ...currentData, length: (String(currentData.body).length), type: 'Shortest', } : previousData?.shortest),
+      longest: ((String(currentData.body).length >= commentLength?.longest) ? { ...currentData, length: (String(currentData.body).length), type: 'Longest', } : previousData?.longest),
+      average: ((itemLengthDifference < closestLengthDifference) ? { ...currentData, length: (String(currentData.body).length), type: 'Average', } : previousData?.average)
+    }
+  }, { shortest: response?.data?.data?.[0], longest: response?.data?.data?.[0], average: response?.data?.data?.[0] })), [response?.data?.data, commentLength]);
   
   return (
     (response?.isLoading) ? <p>{langTrans('data/loading')}</p> :
@@ -60,7 +57,7 @@ const Length = () => {
       <h3 className="title">{langTrans('title/comment/shortest')}</h3>
       <div className={styles['properties-holder']}>{Values(langTrans, comment?.shortest)}</div>
       <h3 className="title">{langTrans('title/comment/average')}</h3>
-      <div className={styles['properties-holder']}>{Values(langTrans, averageComment)}</div>
+      <div className={styles['properties-holder']}>{Values(langTrans, comment?.average)}</div>
       <h3 className="title">{langTrans('title/comment/longest')}</h3>
       <div className={styles['properties-holder']}>{Values(langTrans, comment?.longest)}</div>
     </>
