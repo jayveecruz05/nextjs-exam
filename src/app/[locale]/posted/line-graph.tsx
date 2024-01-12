@@ -3,13 +3,13 @@
 import * as d3 from "d3";
 import { useCallback, useEffect, useRef } from "react";
 
-const BarChart = ({ data }: any) => {
+const LineGraph = ({ data }: any) => {
   const ref: any = useRef();
   
-  const renderBarChart = useCallback(() => {
+  const renderGraph = useCallback(() => {
     try {
       // Listen on resize
-      window.addEventListener('resize', renderBarChart);
+      window.addEventListener('resize', renderGraph);
 
       // Reset Render
       if (ref?.current?.innerHTML) { ref.current.innerHTML = ''; }
@@ -49,17 +49,17 @@ const BarChart = ({ data }: any) => {
         .data([data])
         .attr("class", "line")
         .attr("fill", "none")
-        .attr("stroke", "#000")
+        .attr("stroke", "#1F1A38")
         .attr("stroke-width", 1.5)
         .attr("d", valueLine);
     } catch (error) {}
   }, [data]);
 
   useEffect(() => {
-    renderBarChart();
+    renderGraph();
   });
 
   return <svg width="100%" height={400} id="bar-chart" ref={ref} />;
 };
 
-export default BarChart;
+export default LineGraph;

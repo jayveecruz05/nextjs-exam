@@ -4,20 +4,20 @@ import * as d3 from "d3";
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef } from "react";
 
-const BarChart = ({ data }: any) => {
+const BarGraph = ({ data }: any) => {
   const langTrans = useTranslations('lang');
   const ref: any = useRef();
   
-  const renderBarChart = useCallback(() => {
+  const renderGraph = useCallback(() => {
     try {
       // Listen on resize
-      window.addEventListener('resize', renderBarChart);
+      window.addEventListener('resize', renderGraph);
 
       // Reset Render
       if (ref?.current?.innerHTML) { ref.current.innerHTML = ''; }
 
       // set the dimensions and margins of the graph
-      const color: any = { shortest: '#F00', average: '#0F0', longest: '#00F' }
+      const color: any = { shortest: '#A17B68', average: '#7B506F', longest: '#1F1A38' }
       const margin = { top: 30, right: 30, bottom: 70, left: 50 },
       width = ref?.current?.clientWidth - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
@@ -64,10 +64,10 @@ const BarChart = ({ data }: any) => {
   }, [data, langTrans]);
 
   useEffect(() => {
-    renderBarChart();
+    renderGraph();
   });
 
   return <svg width="100%" height={400} id="bar-chart" ref={ref} />;
 };
 
-export default BarChart;
+export default BarGraph;
