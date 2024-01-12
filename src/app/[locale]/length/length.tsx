@@ -25,6 +25,21 @@ const Length = () => {
   // Queries
   const response: any = getComments()
 
+  // const simpleCommentsList = useMemo(() => {
+  //   const sortedList = response?.data?.data?.concat()?.sort((a: any, b: any) => (String(a.body).length - String(b.body).length))
+  //   const averageLength = (response?.data?.data.reduce((previousCount: any, currentCount: any, currentIndex: any) => ((previousCount + String(currentCount.body).length) / ((currentIndex === (response?.data?.data?.length -1)) ? response?.data?.data?.length : 1)), 0))
+  //   const average = response?.data?.data?.reduce((previousData: any, currentData: any) => {
+  //     const itemLengthDifference = Math.abs(String(currentData?.body).length - averageLength);
+  //     const closestLengthDifference = Math.abs(String(previousData?.body).length - averageLength);
+  //     return ((itemLengthDifference < closestLengthDifference) ? { ...currentData, length: (String(currentData.body).length), type: 'Average', } : previousData)
+  //   }, response?.data?.data?.[0])
+  //   return {
+  //     shortest: { ...sortedList?.[0], type: 'Shortest', length: (String(sortedList?.[0]?.body).length) },
+  //     longest: { ...sortedList?.[sortedList.length - 1], type: 'Longest', length: (String(sortedList?.[sortedList.length - 1]?.body).length) },
+  //     average
+  //   }
+  // }, [response?.data?.data])
+
   // Get the shortest, longest and average length
   const commentLength = useMemo(() => (response?.data?.data?.reduce((previousData: any, currentData: any, currentIndex: number) => {
     const shortest = ((String(currentData.body).length < previousData?.shortest) ? (String(currentData.body).length) : previousData?.shortest)

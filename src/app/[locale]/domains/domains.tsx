@@ -32,7 +32,7 @@ const Domains = () => {
         <span className="label">{langTrans('label/search')}</span>
         <input ref={searchRef} type="text" className="filter-text-box" placeholder={langTrans('label/placeholder')} onInput={onFilterTextBoxChanged}/>
       </div>
-      <div className={"ag-theme-quartz-dark"} style={{ width: '100%', height: '50vh' }}>
+      <div className={"ag-theme-quartz"} style={{ width: '100%', height: '50vh' }}>
         <AgGridReact ref={tableRef} columnDefs={colDefs} rowData={domainList} pagination={true} paginationPageSize={20} localeText={{ pageSizeSelectorLabel: langTrans('table-parts/page-size'), page: langTrans('table-parts/page'), of: langTrans('table-parts/of'), to: langTrans('table-parts/to') }}/>
       </div>
     </>

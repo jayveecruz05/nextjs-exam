@@ -87,7 +87,8 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background-color: #12242f !important;
+  background-color: #FFF !important;
+  color: #000 !important;
   /* background: linear-gradient(
       to bottom,
       transparent,
@@ -156,18 +157,18 @@ a {
   .filter-text-box {
     width: 50%;
     padding: 10px;
-    background-color: #1d2d37;
-    border: 1px solid #384751;
+    background-color: #FFF;
+    border: 1px solid #DDD;
     border-radius: 4px;
     box-sizing: border-box;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+// }
 
 @media only screen and (max-width: 430px) {
   .main {

@@ -17,6 +17,7 @@ const BarChart = ({ data }: any) => {
       if (ref?.current?.innerHTML) { ref.current.innerHTML = ''; }
 
       // set the dimensions and margins of the graph
+      const color: any = { shortest: '#F00', average: '#0F0', longest: '#00F' }
       const margin = { top: 30, right: 30, bottom: 70, left: 50 },
       width = ref?.current?.clientWidth - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
@@ -58,7 +59,7 @@ const BarChart = ({ data }: any) => {
         .attr("y", (d: any) => y(d.length))
         .attr("width", x.bandwidth())
         .attr("height", (d: any) => height - y(d.length))
-        .attr("fill", "#FFF");
+        .attr("fill", (d: any) => (color[String(d.type).toLowerCase()]));
     } catch (error) {}
   }, [data, langTrans]);
 

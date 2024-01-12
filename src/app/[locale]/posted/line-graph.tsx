@@ -49,7 +49,7 @@ const BarChart = ({ data }: any) => {
         .data([data])
         .attr("class", "line")
         .attr("fill", "none")
-        .attr("stroke", "#FFF")
+        .attr("stroke", "#000")
         .attr("stroke-width", 1.5)
         .attr("d", valueLine);
     } catch (error) {}
