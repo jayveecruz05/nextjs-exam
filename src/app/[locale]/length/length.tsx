@@ -44,9 +44,10 @@ const Length = () => {
     return {
       shortest: ((String(currentData.body).length <= commentLength?.shortest) ? { ...currentData, length: (String(currentData.body).length), type: 'Shortest', } : previousData?.shortest),
       longest: ((String(currentData.body).length >= commentLength?.longest) ? { ...currentData, length: (String(currentData.body).length), type: 'Longest', } : previousData?.longest),
-      average: ((itemLengthDifference < closestLengthDifference) ? { ...currentData, length: (String(currentData.body).length), type: 'Average', } : previousData?.average)
+      average: ((itemLengthDifference < closestLengthDifference) ? { ...currentData, length: (String(currentData.body).length), type: 'Average', } : previousData?.average),
+      // averageList: [ ...previousData?.averageList, ...((itemLengthDifference <= 1) ? [ { ...currentData, length: (String(currentData.body).length), type: 'Average', } ] : []) ]
     }
-  }, { shortest: response?.data?.data?.[0], longest: response?.data?.data?.[0], average: response?.data?.data?.[0] })), [response?.data?.data, commentLength]);
+  }, { shortest: response?.data?.data?.[0], longest: response?.data?.data?.[0], average: response?.data?.data?.[0], averageList: [] })), [response?.data?.data, commentLength]);
   
   return (
     (response?.isLoading) ? <p>{langTrans('data/loading')}</p> :
@@ -58,6 +59,7 @@ const Length = () => {
       <div className={styles['properties-holder']}>{Values(langTrans, comment?.shortest)}</div>
       <h3 className="title">{langTrans('title/comment/average')}</h3>
       <div className={styles['properties-holder']}>{Values(langTrans, comment?.average)}</div>
+      {/* {comment?.averageList?.map((item: any) => (<div key={item?.id} className={styles['properties-holder']}>{Values(langTrans, item)}</div>))} */}
       <h3 className="title">{langTrans('title/comment/longest')}</h3>
       <div className={styles['properties-holder']}>{Values(langTrans, comment?.longest)}</div>
     </>
