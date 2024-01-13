@@ -52,7 +52,9 @@ const LineGraph = ({ data }: any) => {
         .attr("stroke", "#1F1A38")
         .attr("stroke-width", 1.5)
         .attr("d", valueLine);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }, [data]);
 
   useEffect(() => {

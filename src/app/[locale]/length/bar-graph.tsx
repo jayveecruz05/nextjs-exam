@@ -60,7 +60,9 @@ const BarGraph = ({ data }: any) => {
         .attr("width", x.bandwidth())
         .attr("height", (d: any) => height - y(d.length))
         .attr("fill", (d: any) => (color[String(d.type).toLowerCase()]));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }, [data, langTrans]);
 
   useEffect(() => {

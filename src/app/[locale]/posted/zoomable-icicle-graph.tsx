@@ -21,12 +21,9 @@ const ZoomableIcicleGraph = ({ data }: any) => {
             height = ref?.current?.clientHeight;
 
       const commentsData: any = { name: 'comments', children: [] }
-      let currentPostID = 0;
-      data.forEach((item: any) => {
-        if (currentPostID !== item.postId) {
-          currentPostID = item.postId;
-          commentsData.children = [ ...commentsData.children, { name: `postId ${currentPostID}`, children: (data?.filter((i: any) => i.postId === currentPostID)).map((i: any) => ({ ...i, value: 1, isMessage: true })) } ]
-        }
+      const postIdList: number[] = data?.reduce((previousList: any, currentItem: any) => ([ ...previousList, ...((previousList.indexOf(currentItem?.postId) === -1) ? [ currentItem?.postId ] : []) ]), [])
+      postIdList.forEach((id: number) => {
+        commentsData.children = [ ...commentsData.children, { name: `postId ${id}`, children: (data?.filter((i: any) => i.postId === id)).map((i: any) => ({ ...i, value: 1, isMessage: true })) } ]
       });
 
       // Create the color scale.
