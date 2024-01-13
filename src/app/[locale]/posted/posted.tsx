@@ -3,7 +3,7 @@
 // import styles from './posted.module.scss';
 import { useTranslations } from 'next-intl';
 import { useApiContext } from '@/assets/script/api/context/global'
-import LineGraph from './line-graph';
+import Graph from './zoomable-icicle-graph';
 
 const Posted = () => {
   const langTrans = useTranslations('lang');
@@ -14,8 +14,8 @@ const Posted = () => {
     (response?.isLoading) ? <p>{langTrans('data/loading')}</p> :
     (response?.isError && <p>{langTrans('data/error')}</p>) ||
     <>
-      <h3 className="title">{langTrans('title/graph/line')}</h3>
-      <LineGraph data={response?.data?.data}/>
+      <h3 className="title">{langTrans('title/graph/zoomable-icicle')}</h3>
+      <Graph data={response?.data?.data}/>
     </>
   )
 }

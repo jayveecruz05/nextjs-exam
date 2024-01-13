@@ -22,6 +22,7 @@
     "data-name/type/longest": "最长",
     "title/graph/bar": "条状图:",
     "title/graph/line": "线形图:",
+    "title/graph/zoomable-icicle": "可缩放冰柱图:",
     "title/comment/shortest": "最短评论:",
     "title/comment/average": "平均评论:",
     "title/comment/longest": "最长评论:",

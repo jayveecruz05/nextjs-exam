@@ -4,7 +4,7 @@ import styles from './length.module.scss';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo } from 'react'
 import { useApiContext } from '@/assets/script/api/context/global'
-import BarGraph from './bar-graph';
+import Graph from './bar-graph';
 
 const Values = (langTrans: any, object: any) => {
   const list: any[] = []
@@ -69,8 +69,8 @@ const Length = () => {
     (response?.isError && <p>{langTrans('data/error')}</p>) ||
     <>
       <h3 className="title">{langTrans('title/graph/bar')}</h3>
-      <BarGraph data={[ simplifiedCommentsList?.shortest, simplifiedCommentsList?.average, simplifiedCommentsList?.longest ]}/>
-      {/* <BarGraph data={[ { type: 'shortest', length: commentLength?.shortest }, { type: 'average', length: commentLength?.average }, { type: 'longest', length: commentLength?.longest } ]}/> */}
+      <Graph data={[ simplifiedCommentsList?.shortest, simplifiedCommentsList?.average, simplifiedCommentsList?.longest ]}/>
+      {/* <Graph data={[ { type: 'shortest', length: commentLength?.shortest }, { type: 'average', length: commentLength?.average }, { type: 'longest', length: commentLength?.longest } ]}/> */}
       <h3 className="title">{langTrans('title/comment/shortest')}</h3>
       <div className={styles['properties-holder']}>{Values(langTrans, simplifiedCommentsList?.shortest)}</div>
       <h3 className="title">{langTrans('title/comment/average')}</h3>

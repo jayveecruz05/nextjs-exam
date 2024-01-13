@@ -59,7 +59,7 @@ const LineGraph = ({ data }: any) => {
     renderGraph();
   });
 
-  return <svg width="100%" height={400} id="bar-chart" ref={ref} />;
+  return <svg width="100%" height={400} id="graph" ref={ref} />;
 };
 
 export default LineGraph;
