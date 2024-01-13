@@ -1,9 +1,11 @@
 'use client';
 
 import * as d3 from "d3";
+import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef } from "react";
 
 const ZoomableIcicleGraph = ({ data }: any) => {
+  const langTrans = useTranslations('lang');
   const ref: any = useRef();
   
   const renderGraph = useCallback(() => {
@@ -18,12 +20,12 @@ const ZoomableIcicleGraph = ({ data }: any) => {
       const width = ref?.current?.clientWidth,
             height = ref?.current?.clientHeight;
 
-      const commentsData: any = { name: 'Comments', children: [] }
+      const commentsData: any = { name: 'comments', children: [] }
       let currentPostID = 0;
       data.forEach((item: any) => {
         if (currentPostID !== item.postId) {
           currentPostID = item.postId;
-          commentsData.children = [ ...commentsData.children, { name: `Post ID ${currentPostID}`, children: (data?.filter((i: any) => i.postId === currentPostID)).map((i: any) => ({ ...i, value: 1, isMessage: true })) } ]
+          commentsData.children = [ ...commentsData.children, { name: `postId ${currentPostID}`, children: (data?.filter((i: any) => i.postId === currentPostID)).map((i: any) => ({ ...i, value: 1, isMessage: true })) } ]
         }
       });
 
@@ -99,17 +101,18 @@ const ZoomableIcicleGraph = ({ data }: any) => {
           .attr("width", d => d.y1 - d.y0 - 1)
           .attr("height", d => rectHeight(d))
           .style("opacity", d => +labelVisible(d))
-          .style("padding", "4px")
+          .style("padding", "2px 4px")
           .style("cursor", "pointer")
+          .style("font-size", "14px")
           .on("click", clicked)
           .html((d: any) => {
             return (d?.data?.isMessage) ? `
-              <p style="padding-bottom: 4px">ID: ${d.data.id}</p>
-              <p style="padding-bottom: 4px">Post ID: ${d.data.postId}</p>
-              <p style="padding-bottom: 4px">Name: ${d.data.name}</p>
-              <p style="padding-bottom: 4px">Email: ${d.data.email}</p>
-              <p style="padding-bottom: 4px">Body: ${d.data.body}</p>
-          ` : `<span>${d.data.name}${((!d.parent) ? ` ${format(d.value)}` : '')}</span>`
+              <p style="padding-bottom: 4px">${langTrans('data-name/id')}: ${d.data.id}</p>
+              <p style="padding-bottom: 4px">${langTrans('data-name/postId')}: ${d.data.postId}</p>
+              <p style="padding-bottom: 4px">${langTrans('data-name/name')}: ${d.data.name}</p>
+              <p style="padding-bottom: 4px">${langTrans('data-name/email')}: ${d.data.email}</p>
+              <p style="padding-bottom: 4px">${langTrans('data-name/body')}: ${d.data.body}</p>
+          ` : `<span>${langTrans((/comments/ig.test(d.data.name)) ? 'comments/title' : 'data-name/postId')}${((!d.parent) ? ` ${format(d.value)}` : ` ${format(d?.data?.children[0]?.postId)}`)}</span>`
           });
 
       // const text = cell.append("text")
@@ -134,13 +137,13 @@ const ZoomableIcicleGraph = ({ data }: any) => {
     } catch (error) {
       console.log(error);
     }
-  }, [data]);
+  }, [data, langTrans]);
 
   useEffect(() => {
     renderGraph();
   });
 
-  return <svg width="100%" height="120rem" id="graph" ref={ref} />;
+  return <svg width="100%" height="140rem" id="graph" ref={ref} />;
 };
 
 export default ZoomableIcicleGraph;
