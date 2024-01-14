@@ -40,7 +40,7 @@ const ZoomableIcicleGraph = ({ data }: any) => {
       // On click, change the focus and transitions it into view.
       let focus = root;
       const clicked = (event: any, p: any) => {
-        if (p?.parent) {
+        if (p?.parent && !p?.data?.isMessage) {
           focus = focus === p ? p = p.parent : p;
 
           root.each((d: any) => d.target = {
@@ -99,7 +99,7 @@ const ZoomableIcicleGraph = ({ data }: any) => {
           .attr("height", d => rectHeight(d))
           .style("opacity", d => +labelVisible(d))
           .style("padding", "2px 4px")
-          .style("cursor", "pointer")
+          .style("cursor", (d: any) => ((/^postId/ig.test(d?.data?.name)) ? 'pointer' : ''))
           .style("font-size", "14px")
           .on("click", clicked)
           .html((d: any) => {
