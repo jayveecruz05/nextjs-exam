@@ -31,11 +31,11 @@ const Length = () => {
     const average = response?.data?.data?.reduce((previousData: any, currentData: any) => {
       const itemLengthDifference = Math.abs(String(currentData?.body).length - averageLength);
       const closestLengthDifference = Math.abs(String(previousData?.body).length - averageLength);
-      return ((itemLengthDifference < closestLengthDifference) ? { ...currentData, length: (String(currentData.body).length), type: 'Average', } : previousData)
+      return ((itemLengthDifference < closestLengthDifference) ? { ...currentData, length: (String(currentData.body).length), type: 'Average' } : previousData)
     }, response?.data?.data?.[0])
     return {
-      shortest: { ...sortedList?.[0], type: 'Shortest', length: (String(sortedList?.[0]?.body).length) },
-      longest: { ...sortedList?.[sortedList.length - 1], type: 'Longest', length: (String(sortedList?.[sortedList.length - 1]?.body).length) },
+      shortest: { ...sortedList?.[0], length: (String(sortedList?.[0]?.body).length), type: 'Shortest' },
+      longest: { ...sortedList?.[sortedList.length - 1], length: (String(sortedList?.[sortedList.length - 1]?.body).length), type: 'Longest' },
       average
     }
   }, [response?.data?.data])
