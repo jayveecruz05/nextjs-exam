@@ -98,18 +98,19 @@ const ZoomableIcicleGraph = ({ data }: any) => {
           .attr("width", d => d.y1 - d.y0 - 1)
           .attr("height", d => rectHeight(d))
           .style("opacity", d => +labelVisible(d))
-          .style("padding", "2px 4px")
           .style("cursor", (d: any) => ((/^postId/ig.test(d?.data?.name)) ? 'pointer' : ''))
           .style("font-size", "14px")
           .on("click", clicked)
           .html((d: any) => {
             return (d?.data?.isMessage) ? `
-              <p style="padding-bottom: 4px">${langTrans('data-name/id')}: ${d.data.id}</p>
-              <p style="padding-bottom: 4px">${langTrans('data-name/postId')}: ${d.data.postId}</p>
-              <p style="padding-bottom: 4px">${langTrans('data-name/name')}: ${d.data.name}</p>
-              <p style="padding-bottom: 4px">${langTrans('data-name/email')}: ${d.data.email}</p>
-              <p style="padding-bottom: 4px">${langTrans('data-name/body')}: ${d.data.body}</p>
-          ` : `<span>${langTrans((/comments/ig.test(d.data.name)) ? 'comments/title' : 'data-name/postId')}${((!d.parent) ? ` ${format(d.value)}` : ` ${format(d?.data?.children[0]?.postId)}`)}</span>`
+              <div style="padding: 3px 4px; width: 100%; height: 100%; line-height: 1.2;">
+                <p style="padding-bottom: 4px">${langTrans('data-name/id')}: ${d.data.id}</p>
+                <p style="padding-bottom: 4px">${langTrans('data-name/postId')}: ${d.data.postId}</p>
+                <p style="padding-bottom: 4px">${langTrans('data-name/name')}: ${d.data.name}</p>
+                <p style="padding-bottom: 4px">${langTrans('data-name/email')}: ${d.data.email}</p>
+                <p style="padding-bottom: 4px">${langTrans('data-name/body')}: ${d.data.body}</p>
+              </div>
+          ` : `<span style="display: block; padding: 3px 4px; width: 100%; height: 100%; line-height: 1.2;">${langTrans((/comments/ig.test(d.data.name)) ? 'comments/title' : 'data-name/postId')}${((!d.parent) ? ` ${format(d.value)}` : ` ${format(d?.data?.children[0]?.postId)}`)}</span>`
           });
 
       // const text = cell.append("text")
