@@ -16,15 +16,15 @@ const ZoomableIcicleGraph = ({ data }: any) => {
       // Reset Render
       if (ref?.current?.innerHTML) { ref.current.innerHTML = ''; }
 
-      // set the dimensions and margins of the graph
-      const width = ref?.current?.clientWidth,
-            height = ref?.current?.clientHeight;
-
       const commentsData: any = { name: 'comments', children: [] }
       const postIdList: number[] = data?.reduce((previousList: any, currentItem: any) => ([ ...previousList, ...((previousList.indexOf(currentItem?.postId) === -1) ? [ currentItem?.postId ] : []) ]), [])
       postIdList.forEach((id: number) => {
         commentsData.children = [ ...commentsData.children, { name: `postId ${id}`, children: (data?.filter((i: any) => i.postId === id)).map((i: any) => ({ ...i, value: 1, isMessage: true })) } ]
       });
+
+      // set the dimensions and margins of the graph
+      const width = ref?.current?.clientWidth,
+            height = ref?.current?.clientHeight;
 
       // Create the color scale.
       const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, commentsData.children.length + 1));

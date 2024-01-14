@@ -22,6 +22,7 @@
     "data-name/type/longest": "Longest",
     "title/graph/bar": "Bar Graph:",
     "title/graph/line": "Line Graph:",
+    "title/graph/bubble": "Bubble Graph:",
     "title/graph/zoomable-icicle": "Zoomable Icicle Graph:",
     "title/comment/shortest": "Shortest Comment:",
     "title/comment/average": "Average Comment:",
