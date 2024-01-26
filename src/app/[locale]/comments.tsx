@@ -2,10 +2,10 @@
 
 import { useTranslations } from 'next-intl'
 import { useRef, useCallback, useMemo, useEffect } from 'react'
-import { AgGridReact } from 'ag-grid-react'; // React Grid Logic
+import { AgGridReact } from 'ag-grid-react' // React Grid Logic
 import { Link } from '@/navigation'
 
-import { useApiContext } from '@/assets/script/api/context/global'
+import { useGetComments } from '@/assets/script/api/state/comments'
 
 let isFirstLoad: boolean = true;
 
@@ -29,9 +29,8 @@ const Comments = () => {
     { headerName: langTrans('data-name/action'), pinned: 'right', suppressMenu: true, maxWidth: 90, cellRenderer: (props: any) => LinkRenderer(langTrans, props) },
   ]), [langTrans])
 
-  const { getComments } = useApiContext()
   // Queries
-  const response: any = getComments()
+  const response: any = useGetComments()
   const onFilterTextBoxChanged = useCallback(() => { tableRef.current.api.setGridOption('quickFilterText', searchRef?.current?.value); }, [searchRef])
   useEffect(() => { isFirstLoad = !(isFirstLoad && (response?.isSuccess || response?.isError)); }, [response]);
   return (

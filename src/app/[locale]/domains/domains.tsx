@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react'; // React Grid Logic
 
-import { useApiContext } from '@/assets/script/api/context/global'
+import { useGetComments } from '@/assets/script/api/state/comments';
 
 let isFirstLoad: boolean = true;
 
@@ -17,10 +17,9 @@ const Domains = () => {
   const colDefs: object[] = useMemo(() => ([
     { headerName: langTrans('data-name/domain'), field: 'domain', flex: 1 }
   ]), [langTrans])
-
-  const { getComments } = useApiContext()
+  
   // Queries
-  const response: any = getComments()
+  const response: any = useGetComments()
   const domainList = useMemo(() => response?.data?.data?.reduce((previousData: any, currentData: any) => ((previousData.length === 0 || previousData.find((details: any) => (details.domain !== String(currentData.email).split('@')[1]))) ? [ ...previousData, { domain: String(currentData.email).split('@')[1] } ] : previousData), []), [response?.data?.data]);
   const onFilterTextBoxChanged = useCallback(() => { tableRef.current.api.setGridOption('quickFilterText', searchRef?.current?.value); }, [searchRef])
   useEffect(() => { isFirstLoad = !(isFirstLoad && (response?.isSuccess || response?.isError)); }, [response]);

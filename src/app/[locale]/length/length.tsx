@@ -2,8 +2,8 @@
 
 import styles from './length.module.scss';
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo } from 'react'
-import { useApiContext } from '@/assets/script/api/context/global'
+import { useMemo } from 'react'
+import { useGetComments } from '@/assets/script/api/state/comments'
 import Graph from './bar-graph';
 
 const Values = (langTrans: any, object: any) => {
@@ -21,9 +21,8 @@ const Values = (langTrans: any, object: any) => {
 
 const Length = () => {
   const langTrans = useTranslations('lang');
-  const { getComments } = useApiContext()
   // Queries
-  const response: any = getComments()
+  const response: any = useGetComments()
 
   const simplifiedCommentsList = useMemo(() => {
     const sortedList = response?.data?.data?.concat()?.sort((a: any, b: any) => (String(a.body).length - String(b.body).length))

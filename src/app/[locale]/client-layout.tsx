@@ -4,10 +4,9 @@ import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { ApiProvider } from '@/assets/script/api/context/global'
-import { ReactNode } from 'react';
-import Navigation from './navigation';
+import { ReactQueryDevtools } from 'react-query/devtools'
+import { ReactNode } from 'react'
+import Navigation from './navigation'
 
 interface LocaleLayoutProps {
   children: ReactNode
@@ -29,13 +28,11 @@ const Layout = async ({ children, params: { locale } }: LocaleLayoutProps) => {
   return (
     <NextIntlClientProvider locale={locale} messages={messages} timeZone={'Asia/Singapore'}>
       <QueryClientProvider client={mainQueryClient}>
-        <ApiProvider>
-          <main className="main">
-            <Navigation/>
-            {children}
-          </main>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </ApiProvider>
+        <main className="main">
+          <Navigation/>
+          {children}
+        </main>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </NextIntlClientProvider>
   )

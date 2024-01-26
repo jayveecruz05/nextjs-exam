@@ -4,7 +4,7 @@ import styles from './comment.module.scss';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
 import { useParams } from "next/navigation";
-import { useApiContext } from '@/assets/script/api/context/global'
+import { useGetComment } from '@/assets/script/api/state/comments';
 
 const Values = (langTrans: any, object: any) => {
   const list: any[] = []
@@ -22,9 +22,8 @@ const Values = (langTrans: any, object: any) => {
 const Comment = () => {
   const langTrans = useTranslations('lang');
   const params = useParams<{ id: string }>()
-  const { getComment } = useApiContext()
   // Queries
-  const response: any = getComment(params.id)
+  const response: any = useGetComment(params.id)
   return (
     <>
       <h1 className="title">{langTrans('comment/title')} {params.id}</h1>
