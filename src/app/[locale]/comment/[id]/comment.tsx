@@ -12,7 +12,7 @@ const Values = (langTrans: any, object: any) => {
     list.push(
       <p key={property} className={styles.property}>
         <span className={styles.name}>{langTrans(`data-name/${property}`)}:</span>
-        <span className={styles.value}>{object[property]}</span>
+        <span aria-label={property} className={styles.value}>{object[property]}</span>
       </p>
     );
   }
@@ -27,8 +27,8 @@ const Comment = () => {
   return (
     <>
       <h1 className="title">{langTrans('comment/title')} {params.id}</h1>
-      <Link className={styles['back-button']} href="/">&#8678; {langTrans('button/back')}</Link>
-      {(response?.isLoading) ? <p>{langTrans('data/loading')}</p> : (response?.isError && <p>{langTrans('data/error')}</p>) || (<div className={styles['properties-holder']}>{Values(langTrans, response?.data?.data)}</div>)}
+      <Link aria-label="back-button" className={styles['back-button']} href="/">&#8678; {langTrans('button/back')}</Link>
+      {(response?.isLoading) ? <p>{langTrans('data/loading')}</p> : (response?.isError && <p>{langTrans('data/error')}</p>) || (<div aria-label="properties-holder" className={styles['properties-holder']}>{Values(langTrans, response?.data?.data)}</div>)}
     </>
   )
 }

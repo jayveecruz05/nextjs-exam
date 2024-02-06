@@ -21,9 +21,9 @@ const Navigation = () => {
       </div>
 
       <div className="translation">
-        <span className={`lang${(/^en$/.test(locale)) ? ' active' : ''}`} onClick={() => router.replace({ pathname: pathName, params }, { locale: 'en' })}>English</span>
+        <span aria-label="english-lang" className={`lang${(/^en$/.test(locale)) ? ' active' : ''}`} onClick={() => router.replace({ pathname: pathName, params }, { locale: 'en' })}>English</span>
         <span className="break">|</span>
-        <span className={`lang${(/^cn$/.test(locale)) ? ' active' : ''}`} onClick={() => router.replace({ pathname: pathName, params }, { locale: 'cn' })}>Chinese</span>
+        <span aria-label="chinese-lang" className={`lang${(/^cn$/.test(locale)) ? ' active' : ''}`} onClick={() => router.replace({ pathname: pathName, params }, { locale: 'cn' })}>Chinese</span>
       </div>
     </>
   )
