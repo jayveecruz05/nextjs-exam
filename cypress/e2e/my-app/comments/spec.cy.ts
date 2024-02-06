@@ -45,9 +45,11 @@ describe('Comments Page', () => {
     cy.get('[aria-label="chinese-lang"]').click()
     cy.get('[aria-label="chinese-lang"]').should('have.class', 'active')
     cy.get('[aria-label="english-lang"]').should('not.have.class', 'active')
+    cy.get('.title').should('exist').should('contain', '评论')
 
     cy.get('[aria-label="english-lang"]').click()
     cy.get('[aria-label="english-lang"]').should('have.class', 'active')
     cy.get('[aria-label="chinese-lang"]').should('not.have.class', 'active')
+    cy.get('.title').should('exist').should('contain', 'Comments')
   })
 })
