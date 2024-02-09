@@ -21,9 +21,9 @@ bun dev
 Install Docker App in your computer [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
 
 ```bash
-docker build -t vupico-exam-app .
+docker build -t next-test-app .
 # then
-docker run -p 3000:3000 vupico-exam-app
+docker run -p 3000:3000 next-test-app
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
