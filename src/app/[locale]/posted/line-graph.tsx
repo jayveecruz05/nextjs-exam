@@ -1,7 +1,7 @@
 'use client';
 
 import * as d3 from "d3";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, memo } from "react";
 
 const LineGraph = ({ data }: any) => {
   const ref: any = useRef();
@@ -64,4 +64,4 @@ const LineGraph = ({ data }: any) => {
   return <svg width="100%" height={400} id="graph" ref={ref} />;
 };
 
-export default LineGraph;
+export default memo(LineGraph);

@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 // import styles from './posted.module.scss';
 import { useTranslations } from 'next-intl';
 import { useGetComments } from '@/assets/script/api/state/comments';
@@ -23,4 +24,4 @@ const Posted = () => {
   )
 }
 
-export default Posted;
+export default memo(Posted);

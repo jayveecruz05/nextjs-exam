@@ -2,7 +2,7 @@
 
 import styles from './length.module.scss';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react'
+import { useMemo, memo } from 'react'
 import { useGetComments } from '@/assets/script/api/state/comments'
 import Graph from './bar-graph';
 
@@ -81,4 +81,4 @@ const Length = () => {
   )
 }
 
-export default Length;
+export default memo(Length);

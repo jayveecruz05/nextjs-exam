@@ -2,7 +2,7 @@
 
 import * as d3 from "d3";
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, memo } from "react";
 
 const BubbleGraph = ({ data }: any) => {
   const langTrans = useTranslations('lang');
@@ -98,4 +98,4 @@ const BubbleGraph = ({ data }: any) => {
   return <div id="graph" ref={ref}></div>;
 };
 
-export default BubbleGraph;
+export default memo(BubbleGraph);

@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import styles from './comment.module.scss';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
@@ -33,4 +34,4 @@ const Comment = () => {
   )
 }
 
-export default Comment;
+export default memo(Comment);

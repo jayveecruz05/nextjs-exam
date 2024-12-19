@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, memo } from 'react';
 import { AgGridReact } from 'ag-grid-react'; // React Grid Logic
 
 import { useGetComments } from '@/assets/script/api/state/comments';
@@ -38,4 +38,4 @@ const Domains = () => {
   )
 }
 
-export default Domains;
+export default memo(Domains);

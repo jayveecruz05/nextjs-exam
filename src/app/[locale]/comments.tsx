@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl'
-import { useRef, useCallback, useMemo, useEffect } from 'react'
+import { useRef, useCallback, useMemo, useEffect, memo } from 'react'
 import { AgGridReact } from 'ag-grid-react' // React Grid Logic
 import { Link } from '@/navigation'
 
@@ -48,4 +48,4 @@ const Comments = () => {
   );
 }
 
-export default Comments;
+export default memo(Comments);

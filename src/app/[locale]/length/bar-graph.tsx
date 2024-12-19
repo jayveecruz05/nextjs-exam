@@ -2,7 +2,7 @@
 
 import * as d3 from "d3";
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, memo } from "react";
 
 const BarGraph = ({ data }: any) => {
   const langTrans = useTranslations('lang');
@@ -72,4 +72,4 @@ const BarGraph = ({ data }: any) => {
   return <svg width="100%" height={400} id="graph" ref={ref} />;
 };
 
-export default BarGraph;
+export default memo(BarGraph);
